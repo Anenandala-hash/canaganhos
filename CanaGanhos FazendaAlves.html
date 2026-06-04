@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CanaGanhos · Fazenda Alves</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Sans+3:wght@300;400;600&display=swap');
+
+  :root {
+    --verde: #2d5a27;
+    --verde-claro: #4a8c3f;
+    --palha: #e8d5a3;
+    --palha-escura: #c4a96b;
+    --terra: #6b3d1e;
+    --creme: #faf6ed;
+    --texto: #1a1a1a;
+    --cinza: #6b7280;
+    --branco: #ffffff;
+    --alerta: #c0392b;
+    --sombra: rgba(45,90,39,0.15);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Source Sans 3', sans-serif; background: var(--creme); color: var(--texto); min-height: 100vh; }
+
+  header {
+    background: var(--verde);
+    padding: 24px 40px;
+    display: flex; align-items: center; gap: 16px;
+    position: relative; overflow: hidden;
+  }
+  header::after {
+    content: ''; position: absolute; right: -60px; top: -60px;
+    width: 220px; height: 220px; background: var(--palha-escura);
+    opacity: 0.12; border-radius: 50%;
+  }
+  .logo-icon { font-size: 2.2rem; }
+  header h1 { font-family: 'Playfair Display', serif; color: var(--palha); font-size: 1.7rem; line-height: 1.1; }
+  header .sub { color: rgba(232,213,163,0.65); font-size: 0.82rem; font-weight: 300; letter-spacing: 0.08em; display: block; margin-top: 2px; }
+
+  .badge-contrato {
+    margin-left: auto;
+    background: rgba(232,213,163,0.15);
+    border: 1px solid rgba(232,213,163,0.3);
+    color: var(--palha);
+    padding: 6px 14px; border-radius: 20px;
+    font-size: 0.78rem; font-weight: 600;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+  }
+
+  .tabs {
+    background: var(--verde); padding: 0 40px;
+    display: flex; gap: 4px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    overflow-x: auto;
+  }
+  .tab {
+    padding: 11px 18px; color: rgba(232,213,163,0.6);
+    font-size: 0.84rem; font-weight: 600; cursor: pointer;
+    border-bottom: 3px solid transparent; transition: all 0.2s;
+    letter-spacing: 0.04em; text-transform: uppercase; white-space: nowrap;
+  }
+  .tab:hover { color: var(--palha); }
+  .tab.active { color: var(--palha); border-bottom-color: var(--palha-escura); }
+
+  main { max-width: 980px; margin: 0 auto; padding: 32px 20px 60px; }
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  .card {
+    background: var(--branco); border-radius: 12px; padding: 24px 28px;
+    box-shadow: 0 2px 16px var(--sombra); margin-bottom: 20px;
+    border-left: 4px solid var(--verde-claro);
+  }
+  .card.destaque { border-left-color: var(--palha-escura); }
+  .card.alerta-card { border-left-color: var(--alerta); }
+
+  .card h2 {
+    font-family: 'Playfair Display', serif; color: var(--verde);
+    font-size: 1.15rem; margin-bottom: 16px;
+    display: flex; align-items: center; gap: 8px;
+  }
+
+  /* DADOS DO CONTRATO */
+  .contrato-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
+    margin-bottom: 4px;
+  }
+  .dado-item {
+    background: var(--creme); border-radius: 8px; padding: 12px 14px;
+    border: 1px solid #e8e3d9;
+  }
+  .dado-item .rotulo { font-size: 0.74rem; color: var(--cinza); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; font-weight: 600; }
+  .dado-item .valor { font-size: 1.05rem; font-weight: 700; color: var(--verde); }
+
+  /* SLIDER */
+  .slider-wrap { margin: 16px 0; }
+  .slider-wrap label { font-size: 0.8rem; font-weight: 600; color: var(--cinza); text-transform: uppercase; letter-spacing: 0.06em; display: flex; justify-content: space-between; margin-bottom: 8px; }
+  .slider-wrap label span { color: var(--verde); font-size: 1rem; }
+  input[type=range] {
+    width: 100%; -webkit-appearance: none; height: 6px;
+    background: linear-gradient(to right, var(--verde-claro) 0%, var(--verde-claro) 50%, #e0d9cc 50%, #e0d9cc 100%);
+    border-radius: 3px; outline: none;
+  }
+  input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none; width: 20px; height: 20px;
+    background: var(--verde); border-radius: 50%;
+    cursor: pointer; box-shadow: 0 2px 6px var(--sombra);
+  }
+  .faixas { display: flex; justify-content: space-between; font-size: 0.72rem; color: var(--cinza); margin-top: 4px; }
+
+  /* RESULTADO PRINCIPAL */
+  .resultado-principal {
+    background: linear-gradient(135deg, var(--verde) 0%, #1a3d16 100%);
+    border-radius: 12px; padding: 28px 32px; color: var(--branco); margin-top: 20px;
+    display: none;
+  }
+  .resultado-principal.show { display: block; }
+  .resultado-principal h3 { font-family: 'Playfair Display', serif; font-size: 1.15rem; color: var(--palha); margin-bottom: 20px; }
+
+  .r-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 20px; }
+  .r-item { background: rgba(255,255,255,0.1); border-radius: 8px; padding: 14px; text-align: center; }
+  .r-item .v { font-size: 1.3rem; font-weight: 700; color: var(--palha); font-family: 'Playfair Display', serif; }
+  .r-item .l { font-size: 0.7rem; color: rgba(255,255,255,0.6); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 4px; }
+
+  /* TABELA DE CORTES */
+  table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+  th { background: var(--verde); color: var(--palha); padding: 10px 12px; text-align: left; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; }
+  td { padding: 10px 12px; border-bottom: 1px solid #f0ece3; }
+  tr:last-child td { border-bottom: none; font-weight: 700; background: #f5f2ea; }
+  tr:nth-child(even) td { background: #faf8f2; }
+  tr:last-child td { background: #eef5ec; }
+  .tag-ciclo { background: var(--verde-claro); color: white; font-size: 0.7rem; padding: 2px 8px; border-radius: 10px; margin-left: 6px; }
+  .tag-ciclo2 { background: var(--palha-escura); color: white; font-size: 0.7rem; padding: 2px 8px; border-radius: 10px; margin-left: 6px; }
+
+  /* IA BOX */
+  .ia-box { background: #fff; border-radius: 10px; padding: 18px 22px; margin-top: 18px; border-left: 4px solid var(--palha-escura); display: none; box-shadow: 0 2px 12px var(--sombra); }
+  .ia-box.show { display: block; }
+  .ia-header { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; color: var(--verde); font-weight: 600; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.06em; }
+  .ia-content { color: var(--texto); font-size: 0.93rem; line-height: 1.75; white-space: pre-wrap; }
+
+  /* ALERTAS */
+  .alerta-item {
+    display: flex; gap: 12px; padding: 14px 16px;
+    border-bottom: 1px solid #f0ece3;
+    align-items: flex-start;
+  }
+  .alerta-item:last-child { border-bottom: none; }
+  .alerta-icon { font-size: 1.2rem; flex-shrink: 0; margin-top: 2px; }
+  .alerta-titulo { font-weight: 600; font-size: 0.9rem; margin-bottom: 3px; color: var(--texto); }
+  .alerta-desc { font-size: 0.85rem; color: var(--cinza); line-height: 1.5; }
+  .badge-risco { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 0.7rem; font-weight: 700; margin-left: 8px; }
+  .badge-alto { background: #fde8e8; color: var(--alerta); }
+  .badge-medio { background: #fff3e0; color: #e67e22; }
+  .badge-baixo { background: #eef5ec; color: var(--verde); }
+
+  /* CHAT */
+  .chat-area { background: #f5f2ec; border-radius: 10px; padding: 18px; min-height: 180px; max-height: 400px; overflow-y: auto; margin-bottom: 14px; display: flex; flex-direction: column; gap: 10px; }
+  .msg { padding: 11px 15px; border-radius: 10px; max-width: 85%; font-size: 0.91rem; line-height: 1.6; white-space: pre-wrap; }
+  .msg.user { background: var(--verde); color: var(--palha); align-self: flex-end; border-bottom-right-radius: 2px; }
+  .msg.bot { background: var(--branco); color: var(--texto); align-self: flex-start; border-bottom-left-radius: 2px; box-shadow: 0 1px 4px var(--sombra); }
+  .chat-row { display: flex; gap: 10px; }
+  .chat-row input { flex: 1; padding: 10px 14px; border: 1.5px solid #e0d9cc; border-radius: 8px; font-family: 'Source Sans 3', sans-serif; font-size: 0.9rem; background: var(--creme); }
+  .chat-row input:focus { outline: none; border-color: var(--verde-claro); }
+  .quick-btns { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 12px; }
+  .qb { background: var(--creme); border: 1.5px solid var(--palha-escura); color: var(--verde); font-size: 0.78rem; padding: 5px 11px; border-radius: 20px; cursor: pointer; font-family: 'Source Sans 3', sans-serif; transition: all 0.2s; }
+  .qb:hover { background: var(--verde); color: var(--palha); border-color: var(--verde); }
+
+  .btn { background: var(--verde); color: var(--palha); border: none; padding: 12px 24px; border-radius: 8px; font-family: 'Source Sans 3', sans-serif; font-size: 0.92rem; font-weight: 600; cursor: pointer; transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px; }
+  .btn:hover { background: var(--verde-claro); transform: translateY(-1px); box-shadow: 0 4px 14px var(--sombra); }
+  .btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+  .btn-sm { padding: 8px 16px; font-size: 0.82rem; }
+
+  /* BARRA */
+  .barra-wrap { margin-top: 10px; }
+  .barra-label { display: flex; justify-content: space-between; font-size: 0.78rem; color: rgba(255,255,255,0.65); margin-bottom: 4px; }
+  .barra { height: 7px; background: rgba(255,255,255,0.15); border-radius: 4px; overflow: hidden; }
+  .barra-fill { height: 100%; border-radius: 4px; background: var(--palha-escura); transition: width 0.8s ease; }
+
+  @media (max-width: 640px) {
+    header { padding: 16px; flex-wrap: wrap; }
+    .badge-contrato { display: none; }
+    .tabs { padding: 0 10px; }
+    .tab { padding: 9px 10px; font-size: 0.74rem; }
+    main { padding: 16px 12px 50px; }
+    .card { padding: 18px 16px; }
+    .contrato-grid { grid-template-columns: 1fr 1fr; }
+    .r-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  /* LOGIN OVERLAY */
+  #login-overlay {
+    position: fixed; inset: 0; z-index: 9999;
+    background: linear-gradient(135deg, #1a3d16 0%, #2d5a27 60%, #4a8c3f 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Source Sans 3', sans-serif;
+  }
+  .login-box {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(232,213,163,0.25);
+    border-radius: 18px;
+    padding: 48px 40px;
+    width: 360px;
+    max-width: 92vw;
+    text-align: center;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 24px 80px rgba(0,0,0,0.4);
+  }
+  .login-box .icon { font-size: 3rem; margin-bottom: 12px; display: block; }
+  .login-box h2 {
+    font-family: 'Playfair Display', serif;
+    color: #e8d5a3; font-size: 1.6rem; margin-bottom: 4px;
+  }
+  .login-box p { color: rgba(232,213,163,0.55); font-size: 0.85rem; margin-bottom: 28px; }
+  .login-box input[type=password] {
+    width: 100%; padding: 13px 16px;
+    background: rgba(255,255,255,0.08);
+    border: 1.5px solid rgba(232,213,163,0.2);
+    border-radius: 10px; color: #e8d5a3;
+    font-size: 1rem; font-family: 'Source Sans 3', sans-serif;
+    outline: none; margin-bottom: 14px;
+    transition: border-color 0.2s;
+    letter-spacing: 0.12em;
+    text-align: center;
+  }
+  .login-box input[type=password]:focus { border-color: rgba(232,213,163,0.6); }
+  .login-box input[type=password]::placeholder { letter-spacing: 0.04em; color: rgba(232,213,163,0.35); }
+  .login-btn {
+    width: 100%; padding: 13px;
+    background: #c4a96b; color: #1a3d16;
+    border: none; border-radius: 10px;
+    font-size: 0.95rem; font-weight: 700;
+    cursor: pointer; transition: all 0.2s;
+    font-family: 'Source Sans 3', sans-serif;
+    letter-spacing: 0.06em; text-transform: uppercase;
+  }
+  .login-btn:hover { background: #e8d5a3; transform: translateY(-1px); }
+  .login-erro {
+    color: #ff7b7b; font-size: 0.82rem;
+    margin-top: 10px; display: none;
+  }
+  .login-rodape {
+    margin-top: 24px;
+    color: rgba(232,213,163,0.3);
+    font-size: 0.74rem;
+  }
+
+</style>
+</head>
+<body>
+
+<div id="login-overlay">
+  <div class="login-box">
+    <span class="icon">🌾</span>
+    <h2>CanaGanhos</h2>
+    <p>Simulador do Produtor Rural<br>Setor Sucroalcoleiro</p>
+    <input type="password" id="senha-input" placeholder="Digite a senha de acesso" onkeydown="if(event.key==='Enter') verificarSenha()">
+    <button class="login-btn" onclick="verificarSenha()">Entrar →</button>
+    <div class="login-erro" id="login-erro">❌ Senha incorreta. Tente novamente.</div>
+    <div class="login-rodape">Acesso restrito · CanaGanhos 2026</div>
+  </div>
+</div>
+<script>
+function verificarSenha() {
+  const v = document.getElementById('senha-input').value;
+  if (v === 'fazendaalves') {
+    document.getElementById('login-overlay').style.display = 'none';
+    document.body.style.overflow = '';
+  } else {
+    document.getElementById('login-erro').style.display = 'block';
+    document.getElementById('senha-input').value = '';
+    document.getElementById('senha-input').focus();
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  document.body.style.overflow = 'hidden';
+  setTimeout(() => document.getElementById('senha-input').focus(), 100);
+});
+</script>
+
+
+<header>
+  <div class="logo-icon">🌾</div>
+  <div>
+    <h1>CanaGanhos</h1>
+    <span class="sub">Fazenda Alves · COFCO INTL 254/2023 · Cosmorama-SP</span>
+  </div>
+  <div class="badge-contrato">📄 Contrato Real</div>
+</header>
+
+<div class="tabs">
+  <div class="tab active" onclick="trocarAba('projecao')">📊 Projeção</div>
+  <div class="tab" onclick="trocarAba('cortes')">🗓️ Cortes</div>
+  <div class="tab" onclick="trocarAba('alertas')">⚠️ Alertas</div>
+  <div class="tab" onclick="trocarAba('consultor')">🤖 Consultor</div>
+</div>
+
+<main>
+
+<!-- ===== PROJEÇÃO ===== -->
+<div id="panel-projecao" class="panel active">
+
+  <div class="card destaque">
+    <h2>📋 Dados Reais do Contrato</h2>
+    <div class="contrato-grid">
+      <div class="dado-item"><div class="rotulo">Fazenda</div><div class="valor">Fazenda Alves</div></div>
+      <div class="dado-item"><div class="rotulo">Município</div><div class="valor">Cosmorama-SP</div></div>
+      <div class="dado-item"><div class="rotulo">Compradora</div><div class="valor">COFCO INTL</div></div>
+      <div class="dado-item"><div class="rotulo">Área Agrícola</div><div class="valor">90,36 ha</div></div>
+      <div class="dado-item"><div class="rotulo">ATR 1º Ciclo</div><div class="valor">268.669 kg/ano</div></div>
+      <div class="dado-item"><div class="rotulo">ATR 2º Ciclo</div><div class="valor">214.936 kg/ano</div></div>
+      <div class="dado-item"><div class="rotulo">Parcela Mensal</div><div class="valor">16.533,50 kg</div></div>
+      <div class="dado-item"><div class="rotulo">Distância Usina</div><div class="valor">28 km</div></div>
+      <div class="dado-item"><div class="rotulo">Início</div><div class="valor">Safra 2025/26</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>💰 Simule o Preço do ATR</h2>
+    <p style="font-size:0.88rem;color:var(--cinza);margin-bottom:18px;">
+      Arraste o slider para ver como o preço do ATR impacta sua receita. O ATR em kg já está fixado em contrato — só o preço varia.
+    </p>
+
+    <div class="slider-wrap">
+      <label>Preço do ATR (R$/kg) <span id="preco-display">R$ 1,21/kg</span></label>
+      <input type="range" id="slider-atr" min="0.50" max="1.80" step="0.01" value="1.21" oninput="atualizarSlider(this.value)">
+      <div class="faixas"><span>R$ 0,50 (mínimo histórico)</span><span>R$ 1,21 (atual)</span><span>R$ 1,80 (pico)</span></div>
+    </div>
+    <br>
+    <button class="btn" onclick="calcularProjecao()">Calcular Projeção →</button>
+    <button class="btn btn-sm" style="margin-left:10px;background:transparent;border:2px solid var(--verde);color:var(--verde);" onclick="gerarAnaliseIA()">🤖 Análise IA</button>
+  </div>
+
+  <div class="resultado-principal" id="resultado-principal">
+    <h3>📈 Projeção — 4 Cortes (Safra 2025/26 a 2028/29)</h3>
+    <div class="r-grid" id="r-grid"></div>
+    <div id="r-barras"></div>
+  </div>
+
+  <div class="ia-box" id="ia-projecao">
+    <div class="ia-header">🌿 Análise Estratégica IA</div>
+    <div class="ia-content" id="ia-projecao-texto">Analisando...</div>
+  </div>
+
+</div>
+
+<!-- ===== CORTES ===== -->
+<div id="panel-cortes" class="panel">
+  <div class="card">
+    <h2>🗓️ Cronograma dos 4 Cortes</h2>
+    <p style="font-size:0.88rem;color:var(--cinza);margin-bottom:16px;">
+      Calcule a receita de cada corte com o preço que desejar simular.
+    </p>
+    <div style="display:flex;gap:12px;align-items:flex-end;flex-wrap:wrap;margin-bottom:18px;">
+      <div>
+        <label style="font-size:0.78rem;font-weight:600;color:var(--cinza);text-transform:uppercase;letter-spacing:0.05em;display:block;margin-bottom:5px;">Preço ATR (R$/kg)</label>
+        <input type="number" id="preco-corte" value="1.21" step="0.01" min="0.5" max="2.0" style="padding:9px 12px;border:1.5px solid #e0d9cc;border-radius:8px;font-size:0.95rem;width:120px;background:var(--creme);">
+      </div>
+      <button class="btn btn-sm" onclick="calcularCortes()">Calcular</button>
+    </div>
+    <div id="tabela-cortes"></div>
+  </div>
+  <div class="card" style="border-left-color:#e67e22">
+    <h2>📅 Cronograma de Adiantamentos Mensais</h2>
+    <p style="font-size:0.88rem;color:var(--cinza);margin-bottom:14px;">
+      Recebimentos mensais conforme Anexo I do contrato. Quantidade fixa em ATR × preço do mês.
+    </p>
+    <div id="tabela-adiantamentos"></div>
+  </div>
+</div>
+
+<!-- ===== ALERTAS ===== -->
+<div id="panel-alertas" class="panel">
+  <div class="card alerta-card">
+    <h2>⚠️ Pontos de Atenção no Contrato</h2>
+    <p style="font-size:0.88rem;color:var(--cinza);margin-bottom:16px;">
+      Identificados com base na leitura completa do Instrumento 254/2023 — COFCO INTL.
+    </p>
+
+    <div class="alerta-item">
+      <div class="alerta-icon">🔴</div>
+      <div>
+        <div class="alerta-titulo">ATR cai 20% no 2º ciclo <span class="badge-risco badge-alto">ALTO</span></div>
+        <div class="alerta-desc">A COFCO fixou 268.669 kg/ano no 1º ciclo e 214.935 kg/ano no 2º ciclo — redução de 53.734 kg/ano. Ao preço atual isso representa ~R$ 65.000/ano a menos. Verifique se há justificativa técnica (exaustão do canavial) ou se é uma cláusula de redução de custo para a usina.</div>
+      </div>
+    </div>
+
+    <div class="alerta-item">
+      <div class="alerta-icon">🔴</div>
+      <div>
+        <div class="alerta-titulo">Renovação automática silenciosa <span class="badge-risco badge-alto">ALTO</span></div>
+        <div class="alerta-desc">Cláusula 14.1.1: se você não notificar a COFCO com 6 meses de antecedência (até 30/09 do último ano), o contrato se renova automaticamente por mais 4 cortes nas mesmas condições. Coloque um alerta para setembro de 2028.</div>
+      </div>
+    </div>
+
+    <div class="alerta-item">
+      <div class="alerta-icon">🟠</div>
+      <div>
+        <div class="alerta-titulo">Blindagem anti-CONSECANA <span class="badge-risco badge-medio">MÉDIO</span></div>
+        <div class="alerta-desc">Cláusula 5.5: o contrato declara expressamente que não se sujeita ao regulamento do CONSECANA, exceto para calcular o preço base. Isso limita sua capacidade de contestar cálculos usando as regras padrão do setor. Qualquer disputa vai para o Foro de São José do Rio Preto.</div>
+      </div>
+    </div>
+
+    <div class="alerta-item">
+      <div class="alerta-icon">🟠</div>
+      <div>
+        <div class="alerta-titulo">COFCO pode ceder o contrato a terceiros <span class="badge-risco badge-medio">MÉDIO</span></div>
+        <div class="alerta-desc">Cláusula 10.1: a COFCO pode transferir seus direitos e obrigações a terceiros sem sua anuência prévia, ficando apenas subsidiariamente responsável. Você pode acordar com uma usina desconhecida sem ter sido consultada.</div>
+      </div>
+    </div>
+
+    <div class="alerta-item">
+      <div class="alerta-icon">🟠</div>
+      <div>
+        <div class="alerta-titulo">Multa rescisória elevada <span class="badge-risco badge-medio">MÉDIO</span></div>
+        <div class="alerta-desc">Cláusula 9.1: multa de 10% sobre o valor estimado de toda a cana restante até o fim do contrato. Se você precisar sair no 1º corte, pode dever mais de R$ 100.000 em multa.</div>
+      </div>
+    </div>
+
+    <div class="alerta-item">
+      <div class="alerta-icon">🟡</div>
+      <div>
+        <div class="alerta-titulo">Área reduziu sem aviso prévio <span class="badge-risco badge-baixo">JÁ OCORREU</span></div>
+        <div class="alerta-desc">A área foi reduzida de 94,76 ha para 90,36 ha (−4,6%) por levantamento topográfico da própria COFCO (Contrato_cana_3.pdf). O contrato prevê isso na cláusula 2.1.1, mas o produtor só tem 7 dias para contestar. Confirme se a medição foi aceita formalmente.</div>
+      </div>
+    </div>
+
+    <div class="alerta-item">
+      <div class="alerta-icon">🟢</div>
+      <div>
+        <div class="alerta-titulo">Ponto positivo: custo zero de colheita e frete <span class="badge-risco badge-baixo">VANTAGEM</span></div>
+        <div class="alerta-desc">Cláusula 2.3 da Parceria: a COFCO arca com 100% dos custos de preparo do solo, plantio, colheita, carregamento e transporte. Comparado a contratos tradicionais onde o produtor paga R$ 22–35/t de colheita + R$ 8–12/t de frete, isso representa uma economia real de ~R$ 30–47/t.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="ia-box show" id="ia-alertas" style="display:block!important">
+    <div class="ia-header">⚖️ Recomendação Jurídico-Agronômica</div>
+    <div class="ia-content">Com base nos pontos acima, as ações prioritárias são:
+
+1. AGENDE JÁ um lembrete para setembro/2028 para decidir sobre renovação antes do prazo fatal de 6 meses.
+
+2. VERIFIQUE mensalmente o preço do ATR no site do CONSECANA-SP (orplana.com.br) e compare com o valor usado nos seus adiantamentos. Qualquer diferença superior a 3% merece questionamento formal.
+
+3. GUARDE todos os comprovantes de adiantamento e compare com a fórmula da Cláusula 5.2: Adiantamento = Qtd ATR do Anexo I × Mix do Estado × Preço ATR Acumulado do mês anterior.
+
+4. EM CASO DE DISPUTA, acione a Associação de Fornecedores de Cana da sua região antes de qualquer medida judicial — o custo é menor e o conhecimento técnico é especializado.
+
+5. A redução de 20% no ATR do 2º ciclo deve ser justificada tecnicamente. Peça à COFCO laudo agronômico sobre a expectativa de exaustão do ciclo antes da safra 2027/28.</div>
+  </div>
+</div>
+
+<!-- ===== CONSULTOR ===== -->
+<div id="panel-consultor" class="panel">
+  <div class="card">
+    <h2>🤖 Consultor — Contrato COFCO 254/2023</h2>
+    <p style="font-size:0.88rem;color:var(--cinza);margin-bottom:14px;">
+      Faça perguntas específicas sobre seu contrato. O consultor já conhece todos os dados da Fazenda Alves.
+    </p>
+    <div class="quick-btns">
+      <button class="qb" onclick="pq('Como é calculado meu adiantamento mensal exatamente?')">Cálculo do adiantamento</button>
+      <button class="qb" onclick="pq('O que acontece se o ATR cair muito em 2026?')">Cenário de queda</button>
+      <button class="qb" onclick="pq('Posso sair do contrato antes do 3º corte?')">Rescisão antecipada</button>
+      <button class="qb" onclick="pq('A redução de área de 94,76 para 90,36 ha me prejudica?')">Redução de área</button>
+      <button class="qb" onclick="pq('Como contestar o valor do ATR usado no meu pagamento?')">Contestar ATR</button>
+      <button class="qb" onclick="pq('O contrato é bom para mim em comparação ao mercado?')">Comparar com mercado</button>
+    </div>
+    <div class="chat-area" id="chat"></div>
+    <div class="chat-row">
+      <input type="text" id="chat-input" placeholder="Pergunta sobre seu contrato..." onkeydown="if(event.key==='Enter') enviarChat()">
+      <button class="btn btn-sm" onclick="enviarChat()">→</button>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<script>
+const fmt = v => 'R$ ' + Number(v).toLocaleString('pt-BR', {minimumFractionDigits:2, maximumFractionDigits:2});
+const fmtN = (v,d=1) => Number(v).toLocaleString('pt-BR', {minimumFractionDigits:d, maximumFractionDigits:d});
+const $ = id => document.getElementById(id);
+
+// DADOS REAIS DO CONTRATO
+const CONTRATO = {
+  atr_ciclo1: 268669.42,
+  atr_ciclo2: 214935.53,
+  parcela_mensal_c1: 16533.50,
+  parcela_mensal_c2: 17911.29,
+  area_ha: 90.36,
+  distancia_km: 28,
+  cortes: [
+    { num: 1, safra: '2025/2026', ciclo: 1 },
+    { num: 2, safra: '2026/2027', ciclo: 1 },
+    { num: 3, safra: '2027/2028', ciclo: 2 },
+    { num: 4, safra: '2028/2029', ciclo: 2 },
+  ]
+};
+
+function trocarAba(aba) {
+  const abas = ['projecao','cortes','alertas','consultor'];
+  document.querySelectorAll('.tab').forEach((t,i) => t.classList.toggle('active', abas[i] === aba));
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  $('panel-' + aba).classList.add('active');
+  if (aba === 'cortes') calcularCortes();
+}
+
+function atualizarSlider(v) {
+  const pct = ((v - 0.50) / (1.80 - 0.50)) * 100;
+  $('slider-atr').style.background = `linear-gradient(to right, var(--verde-claro) 0%, var(--verde-claro) ${pct}%, #e0d9cc ${pct}%, #e0d9cc 100%)`;
+  $('preco-display').textContent = 'R$ ' + Number(v).toFixed(2).replace('.', ',') + '/kg';
+}
+
+function calcularProjecao() {
+  const preco = parseFloat($('slider-atr').value);
+  const c1 = CONTRATO.atr_ciclo1 * preco;
+  const c2 = CONTRATO.atr_ciclo2 * preco;
+  const totalCiclo1 = c1 * 2;
+  const totalCiclo2 = c2 * 2;
+  const total = totalCiclo1 + totalCiclo2;
+  const porHa = total / CONTRATO.area_ha;
+  const porMes = total / 48;
+
+  $('r-grid').innerHTML = [
+    { v: fmt(total), l: 'Receita Total 4 Cortes' },
+    { v: fmt(totalCiclo1), l: '1º e 2º Corte (ciclo 1)' },
+    { v: fmt(totalCiclo2), l: '3º e 4º Corte (ciclo 2)' },
+    { v: fmt(porHa), l: 'Por Hectare (total)' },
+  ].map(it => `<div class="r-item"><div class="v">${it.v}</div><div class="l">${it.l}</div></div>`).join('');
+
+  const pctCiclo2vsC1 = ((c2-c1)/c1*100).toFixed(1);
+  $('r-barras').innerHTML = `
+    <div class="barra-wrap">
+      <div class="barra-label"><span>1º e 2º Corte</span><span>${fmt(totalCiclo1)}</span></div>
+      <div class="barra"><div class="barra-fill" style="width:${(totalCiclo1/total*100).toFixed(0)}%"></div></div>
+    </div>
+    <div class="barra-wrap" style="margin-top:10px">
+      <div class="barra-label"><span>3º e 4º Corte (−20% ATR)</span><span>${fmt(totalCiclo2)}</span></div>
+      <div class="barra"><div class="barra-fill" style="width:${(totalCiclo2/total*100).toFixed(0)}%;background:#c4a96b"></div></div>
+    </div>
+    <p style="color:rgba(255,255,255,0.55);font-size:0.78rem;margin-top:12px">
+      ⚠️ A redução de ATR no 2º ciclo representa ${Math.abs(pctCiclo2vsC1)}% a menos por ano em relação ao 1º ciclo.
+      Receita média mensal estimada: ${fmt(porMes)}/mês.
+    </p>
+  `;
+
+  $('resultado-principal').classList.add('show');
+  window._dadosProjecao = { preco, c1, c2, total, totalCiclo1, totalCiclo2, porHa };
+}
+
+function calcularCortes() {
+  const preco = parseFloat($('preco-corte').value) || 1.21;
+  let html = `<table>
+    <tr><th>Corte</th><th>Ano-Safra</th><th>ATR Fixado (kg)</th><th>Receita (R$)</th><th>R$/ha</th></tr>`;
+  let totalAtR = 0, totalR = 0;
+  CONTRATO.cortes.forEach(c => {
+    const atr = c.ciclo === 1 ? CONTRATO.atr_ciclo1 : CONTRATO.atr_ciclo2;
+    const receita = atr * preco;
+    totalAtR += atr; totalR += receita;
+    const tag = c.ciclo === 1 ? `<span class="tag-ciclo">1º Ciclo</span>` : `<span class="tag-ciclo2">2º Ciclo</span>`;
+    html += `<tr><td>${c.num}º Corte ${tag}</td><td>${c.safra}</td><td>${fmtN(atr,2)} kg</td><td>${fmt(receita)}</td><td>${fmt(receita/CONTRATO.area_ha)}</td></tr>`;
+  });
+  html += `<tr><td>TOTAL</td><td>2025–2029</td><td>${fmtN(totalAtR,2)} kg</td><td>${fmt(totalR)}</td><td>${fmt(totalR/CONTRATO.area_ha)}</td></tr>`;
+  html += '</table>';
+  $('tabela-cortes').innerHTML = html;
+
+  // Adiantamentos
+  const parcC1 = CONTRATO.parcela_mensal_c1 * preco;
+  const parcC2 = CONTRATO.parcela_mensal_c2 * preco;
+  $('tabela-adiantamentos').innerHTML = `
+    <table>
+      <tr><th>Período</th><th>Ciclo</th><th>Qtd ATR/mês (kg)</th><th>Valor Estimado/mês</th></tr>
+      <tr><td>Ago/2023 – Dez/2028 (1º ciclo)</td><td><span class="tag-ciclo">1º Ciclo</span></td><td>16.533,50 kg</td><td>${fmt(parcC1)}</td></tr>
+      <tr><td>Jan/2029 – Dez/2033 (2º ciclo)</td><td><span class="tag-ciclo2">2º Ciclo</span></td><td>17.911,29 kg</td><td>${fmt(parcC2)}</td></tr>
+      <tr><td colspan="3"><strong>Diferença mensal entre ciclos</strong></td><td>${fmt(parcC2-parcC1)} a mais/mês</td></tr>
+    </table>
+    <p style="font-size:0.8rem;color:var(--cinza);margin-top:10px;">
+      ⚠️ Atenção: o adiantamento mensal usa o preço do ATR Acumulado CONSECANA do <strong>mês anterior</strong>. 
+      Os valores acima são estimativas com R$ ${preco.toFixed(2).replace('.',',')} /kg.
+    </p>`;
+}
+
+async function gerarAnaliseIA() {
+  if (!window._dadosProjecao) calcularProjecao();
+  const d = window._dadosProjecao;
+  const iaBox = $('ia-projecao');
+  const iaTexto = $('ia-projecao-texto');
+  iaBox.classList.add('show');
+  iaTexto.textContent = '⏳ Analisando seu contrato com a COFCO...';
+
+  const prompt = `Você é um consultor especialista do setor sucroalcoleiro brasileiro e em contratos de parceria agrícola.
+
+Analise o seguinte contrato real:
+- Produtor: Fazenda Alves, Cosmorama-SP
+- Compradora: COFCO International Brasil S.A. (Instrumento 254/2023)
+- Área: 90,36 ha, variedade RB96-6928
+- 4 cortes: safras 2025/26 a 2028/29
+- ATR fixado 1º ciclo: 268.669,42 kg/ano-safra (cortes 1 e 2)
+- ATR fixado 2º ciclo: 214.935,53 kg/ano-safra (cortes 3 e 4) — redução de 20%
+- Preço ATR simulado: R$ ${d.preco.toFixed(2)}/kg
+- Receita estimada 4 cortes: R$ ${d.total.toFixed(0)}
+- Receita por hectare total: R$ ${d.porHa.toFixed(0)}
+- COFCO paga todos os custos de plantio, colheita, frete e insumos
+- Contrato não se sujeita ao CONSECANA exceto para preço base
+- Renovação automática se não houver notificação 6 meses antes
+
+Em 5 parágrafos curtos e diretos:
+1. Avalie se a receita total é boa para um contrato de parceria na região de Cosmorama-SP
+2. Explique o impacto real da redução de 20% no ATR do 2º ciclo
+3. Identifique o maior risco financeiro do contrato
+4. Dê 2 ações concretas para o produtor maximizar seus ganhos
+5. Conclua com uma avaliação geral do contrato (bom/regular/ruim para o produtor)`;
+
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST', headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({ model:'claude-sonnet-4-20250514', max_tokens:1000, messages:[{role:'user',content:prompt}] })
+    });
+    const data = await res.json();
+    iaTexto.textContent = data.content?.[0]?.text || 'Erro na análise.';
+  } catch(e) {
+    iaTexto.textContent = 'Erro de conexão.';
+  }
+}
+
+// CHAT
+const chatHistory = [];
+const SISTEMA = `Você é um consultor especialista do setor sucroalcoleiro brasileiro, com profundo conhecimento em contratos de parceria agrícola e no sistema CONSECANA.
+
+Você tem acesso ao seguinte contrato real do usuário:
+CONTRATO: Instrumento Particular de Compra e Venda de Cana-de-Açúcar nº 254/2023
+PARTES: João Alves Ferreira (Vendedor) × COFCO International Brasil S.A. (Compradora)
+FAZENDA: Fazenda Alves, Cosmorama-SP, 90,36 ha, variedade RB96-6928
+ATR FIXADO 1º CICLO (cortes 1 e 2): 268.669,42 kg/ano-safra
+ATR FIXADO 2º CICLO (cortes 3 e 4): 214.935,53 kg/ano-safra
+PARCELA MENSAL: 16.533,50 kg ATR (ciclo 1); 17.911,29 kg ATR (ciclo 2)
+CUSTOS: COFCO paga tudo (plantio, colheita, frete, insumos)
+PREÇO: baseado no ATR Acumulado CONSECANA do mês anterior × Mix do Estado
+PRAZO: 4 cortes (safras 2025/26 a 2028/29) com opção de prorrogação
+RENOVAÇÃO: automática se não houver notificação 6 meses antes
+MULTA: 10% do valor estimado do restante do contrato
+FORO: São José do Rio Preto-SP
+IMPORTANTE: Contrato declara que não se sujeita ao CONSECANA (cláusula 5.5)
+
+Responda SEMPRE em português, de forma direta e técnica mas acessível. Seja do lado do produtor.`;
+
+async function enviarChat() {
+  const input = $('chat-input');
+  const texto = input.value.trim();
+  if (!texto) return;
+  input.value = '';
+  addMsg(texto, 'user');
+  chatHistory.push({role:'user', content: texto});
+  const bot = addMsg('...', 'bot');
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ model:'claude-sonnet-4-20250514', max_tokens:900, system: SISTEMA, messages: chatHistory })
+    });
+    const data = await res.json();
+    const resp = data.content?.[0]?.text || 'Erro.';
+    chatHistory.push({role:'assistant', content: resp});
+    bot.textContent = resp;
+  } catch(e) { bot.textContent = 'Erro de conexão.'; }
+  $('chat').scrollTop = 9999;
+}
+
+function addMsg(texto, tipo) {
+  const el = document.createElement('div');
+  el.className = 'msg ' + tipo;
+  el.textContent = texto;
+  $('chat').appendChild(el);
+  $('chat').scrollTop = 9999;
+  return el;
+}
+
+function pq(p) { $('chat-input').value = p; trocarAba('consultor'); enviarChat(); }
+
+// Inicializar
+atualizarSlider(1.21);
+calcularProjecao();
+setTimeout(calcularCortes, 100);
+</script>
+</body>
+</html>
