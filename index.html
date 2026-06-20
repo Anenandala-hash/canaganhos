@@ -29,7 +29,6 @@
     min-height: 100vh;
   }
 
-  /* HEADER */
   header {
     background: var(--verde);
     padding: 28px 40px;
@@ -48,10 +47,7 @@
     opacity: 0.12;
     border-radius: 50%;
   }
-  .logo-icon {
-    font-size: 2.4rem;
-    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
-  }
+  .logo-icon { font-size: 2.4rem; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3)); }
   header h1 {
     font-family: 'Playfair Display', serif;
     color: var(--palha);
@@ -67,7 +63,6 @@
     margin-top: 2px;
   }
 
-  /* NAV TABS */
   .tabs {
     background: var(--verde);
     padding: 0 40px;
@@ -87,22 +82,12 @@
     text-transform: uppercase;
   }
   .tab:hover { color: var(--palha); }
-  .tab.active {
-    color: var(--palha);
-    border-bottom-color: var(--palha-escura);
-  }
+  .tab.active { color: var(--palha); border-bottom-color: var(--palha-escura); }
 
-  /* MAIN */
-  main {
-    max-width: 960px;
-    margin: 0 auto;
-    padding: 36px 24px 60px;
-  }
-
+  main { max-width: 960px; margin: 0 auto; padding: 36px 24px 60px; }
   .panel { display: none; }
   .panel.active { display: block; }
 
-  /* CARDS */
   .card {
     background: var(--branco);
     border-radius: 12px;
@@ -121,7 +106,6 @@
     gap: 10px;
   }
 
-  /* GRID DE INPUTS */
   .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
   .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
 
@@ -145,13 +129,8 @@
     color: var(--texto);
     transition: border-color 0.2s;
   }
-  .field input:focus, .field select:focus {
-    outline: none;
-    border-color: var(--verde-claro);
-    background: #fff;
-  }
+  .field input:focus, .field select:focus { outline: none; border-color: var(--verde-claro); background: #fff; }
 
-  /* BOTÃO */
   .btn {
     background: var(--verde);
     color: var(--palha);
@@ -170,14 +149,9 @@
   }
   .btn:hover { background: var(--verde-claro); transform: translateY(-1px); box-shadow: 0 4px 14px var(--sombra); }
   .btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
-  .btn-outline {
-    background: transparent;
-    border: 2px solid var(--verde);
-    color: var(--verde);
-  }
+  .btn-outline { background: transparent; border: 2px solid var(--verde); color: var(--verde); }
   .btn-outline:hover { background: var(--verde); color: var(--palha); }
 
-  /* RESULTADO */
   .resultado {
     background: linear-gradient(135deg, var(--verde) 0%, #1e4019 100%);
     border-radius: 12px;
@@ -196,33 +170,11 @@
     align-items: center;
     gap: 10px;
   }
-  .resultado-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-    margin-bottom: 20px;
-  }
-  .resultado-item {
-    background: rgba(255,255,255,0.1);
-    border-radius: 8px;
-    padding: 14px 16px;
-    text-align: center;
-  }
-  .resultado-item .valor {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--palha);
-    font-family: 'Playfair Display', serif;
-  }
-  .resultado-item .rotulo {
-    font-size: 0.75rem;
-    color: rgba(255,255,255,0.65);
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    margin-top: 4px;
-  }
+  .resultado-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 20px; }
+  .resultado-item { background: rgba(255,255,255,0.1); border-radius: 8px; padding: 14px 16px; text-align: center; }
+  .resultado-item .valor { font-size: 1.5rem; font-weight: 700; color: var(--palha); font-family: 'Playfair Display', serif; }
+  .resultado-item .rotulo { font-size: 0.75rem; color: rgba(255,255,255,0.65); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 4px; }
 
-  /* IA RESPOSTA */
   .ia-box {
     background: #fff;
     border-radius: 10px;
@@ -233,26 +185,9 @@
     box-shadow: 0 2px 12px var(--sombra);
   }
   .ia-box.show { display: block; }
-  .ia-box .ia-header {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 12px;
-    color: var(--verde);
-    font-weight: 600;
-    font-size: 0.9rem;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-  }
-  .ia-box .ia-content {
-    color: var(--texto);
-    font-size: 0.95rem;
-    line-height: 1.7;
-    white-space: pre-wrap;
-  }
-  .ia-box .ia-content p { margin-bottom: 10px; }
+  .ia-box .ia-header { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; color: var(--verde); font-weight: 600; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.06em; }
+  .ia-box .ia-content { color: var(--texto); font-size: 0.95rem; line-height: 1.7; white-space: pre-wrap; }
 
-  /* ALERTA */
   .alerta {
     background: #fff8e6;
     border: 1.5px solid var(--palha-escura);
@@ -266,18 +201,9 @@
     align-items: flex-start;
   }
 
-  /* SPINNER */
-  .spinner {
-    width: 18px; height: 18px;
-    border: 2px solid rgba(255,255,255,0.3);
-    border-top-color: var(--palha);
-    border-radius: 50%;
-    animation: spin 0.7s linear infinite;
-    display: none;
-  }
+  .spinner { width: 18px; height: 18px; border: 2px solid rgba(255,255,255,0.3); border-top-color: var(--palha); border-radius: 50%; animation: spin 0.7s linear infinite; display: none; }
   @keyframes spin { to { transform: rotate(360deg); } }
 
-  /* CHAT */
   .chat-area {
     background: #f5f2ec;
     border-radius: 10px;
@@ -290,88 +216,25 @@
     flex-direction: column;
     gap: 12px;
   }
-  .msg {
-    padding: 12px 16px;
-    border-radius: 10px;
-    max-width: 85%;
-    font-size: 0.93rem;
-    line-height: 1.6;
-    white-space: pre-wrap;
-  }
-  .msg.user {
-    background: var(--verde);
-    color: var(--palha);
-    align-self: flex-end;
-    border-bottom-right-radius: 2px;
-  }
-  .msg.bot {
-    background: var(--branco);
-    color: var(--texto);
-    align-self: flex-start;
-    border-bottom-left-radius: 2px;
-    box-shadow: 0 1px 4px var(--sombra);
-  }
-  .chat-input-row {
-    display: flex;
-    gap: 10px;
-  }
-  .chat-input-row input {
-    flex: 1;
-    padding: 11px 16px;
-    border: 1.5px solid #e0d9cc;
-    border-radius: 8px;
-    font-family: 'Source Sans 3', sans-serif;
-    font-size: 0.93rem;
-    background: var(--creme);
-  }
+  .msg { padding: 12px 16px; border-radius: 10px; max-width: 85%; font-size: 0.93rem; line-height: 1.6; white-space: pre-wrap; }
+  .msg.user { background: var(--verde); color: var(--palha); align-self: flex-end; border-bottom-right-radius: 2px; }
+  .msg.bot { background: var(--branco); color: var(--texto); align-self: flex-start; border-bottom-left-radius: 2px; box-shadow: 0 1px 4px var(--sombra); }
+  .chat-input-row { display: flex; gap: 10px; }
+  .chat-input-row input { flex: 1; padding: 11px 16px; border: 1.5px solid #e0d9cc; border-radius: 8px; font-family: 'Source Sans 3', sans-serif; font-size: 0.93rem; background: var(--creme); }
   .chat-input-row input:focus { outline: none; border-color: var(--verde-claro); }
 
-  /* PERGUNTAS RÁPIDAS */
-  .quick-btns {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-bottom: 14px;
-  }
-  .quick-btn {
-    background: var(--creme);
-    border: 1.5px solid var(--palha-escura);
-    color: var(--verde);
-    font-size: 0.8rem;
-    padding: 6px 12px;
-    border-radius: 20px;
-    cursor: pointer;
-    font-family: 'Source Sans 3', sans-serif;
-    transition: all 0.2s;
-  }
+  .quick-btns { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+  .quick-btn { background: var(--creme); border: 1.5px solid var(--palha-escura); color: var(--verde); font-size: 0.8rem; padding: 6px 12px; border-radius: 20px; cursor: pointer; font-family: 'Source Sans 3', sans-serif; transition: all 0.2s; }
   .quick-btn:hover { background: var(--verde); color: var(--palha); border-color: var(--verde); }
 
-  /* BARRA DE PROGRESSO */
   .barra-wrap { margin-top: 8px; }
-  .barra-label {
-    display: flex;
-    justify-content: space-between;
-    font-size: 0.8rem;
-    color: var(--cinza);
-    margin-bottom: 4px;
-  }
-  .barra {
-    height: 8px;
-    background: #e8e3d9;
-    border-radius: 4px;
-    overflow: hidden;
-  }
-  .barra-fill {
-    height: 100%;
-    border-radius: 4px;
-    background: var(--verde-claro);
-    transition: width 0.6s ease;
-  }
+  .barra-label { display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--cinza); margin-bottom: 4px; }
+  .barra { height: 8px; background: #e8e3d9; border-radius: 4px; overflow: hidden; }
+  .barra-fill { height: 100%; border-radius: 4px; background: var(--verde-claro); transition: width 0.6s ease; }
   .barra-fill.ruim { background: #c0392b; }
   .barra-fill.ok { background: #e67e22; }
   .barra-fill.bom { background: var(--verde-claro); }
 
-  /* RESPONSIVO */
   @media (max-width: 640px) {
     header { padding: 20px; }
     .tabs { padding: 0 12px; }
@@ -381,97 +244,9 @@
     .grid-2, .grid-3 { grid-template-columns: 1fr; }
     .resultado-grid { grid-template-columns: 1fr 1fr; }
   }
-
-  /* LOGIN OVERLAY */
-  #login-overlay {
-    position: fixed; inset: 0; z-index: 9999;
-    background: linear-gradient(135deg, #1a3d16 0%, #2d5a27 60%, #4a8c3f 100%);
-    display: flex; align-items: center; justify-content: center;
-    font-family: 'Source Sans 3', sans-serif;
-  }
-  .login-box {
-    background: rgba(255,255,255,0.06);
-    border: 1px solid rgba(232,213,163,0.25);
-    border-radius: 18px;
-    padding: 48px 40px;
-    width: 360px;
-    max-width: 92vw;
-    text-align: center;
-    backdrop-filter: blur(12px);
-    box-shadow: 0 24px 80px rgba(0,0,0,0.4);
-  }
-  .login-box .icon { font-size: 3rem; margin-bottom: 12px; display: block; }
-  .login-box h2 {
-    font-family: 'Playfair Display', serif;
-    color: #e8d5a3; font-size: 1.6rem; margin-bottom: 4px;
-  }
-  .login-box p { color: rgba(232,213,163,0.55); font-size: 0.85rem; margin-bottom: 28px; }
-  .login-box input[type=password] {
-    width: 100%; padding: 13px 16px;
-    background: rgba(255,255,255,0.08);
-    border: 1.5px solid rgba(232,213,163,0.2);
-    border-radius: 10px; color: #e8d5a3;
-    font-size: 1rem; font-family: 'Source Sans 3', sans-serif;
-    outline: none; margin-bottom: 14px;
-    transition: border-color 0.2s;
-    letter-spacing: 0.12em;
-    text-align: center;
-  }
-  .login-box input[type=password]:focus { border-color: rgba(232,213,163,0.6); }
-  .login-box input[type=password]::placeholder { letter-spacing: 0.04em; color: rgba(232,213,163,0.35); }
-  .login-btn {
-    width: 100%; padding: 13px;
-    background: #c4a96b; color: #1a3d16;
-    border: none; border-radius: 10px;
-    font-size: 0.95rem; font-weight: 700;
-    cursor: pointer; transition: all 0.2s;
-    font-family: 'Source Sans 3', sans-serif;
-    letter-spacing: 0.06em; text-transform: uppercase;
-  }
-  .login-btn:hover { background: #e8d5a3; transform: translateY(-1px); }
-  .login-erro {
-    color: #ff7b7b; font-size: 0.82rem;
-    margin-top: 10px; display: none;
-  }
-  .login-rodape {
-    margin-top: 24px;
-    color: rgba(232,213,163,0.3);
-    font-size: 0.74rem;
-  }
-
 </style>
 </head>
 <body>
-
-<div id="login-overlay">
-  <div class="login-box">
-    <span class="icon">🌾</span>
-    <h2>CanaGanhos</h2>
-    <p>Simulador do Produtor Rural<br>Setor Sucroalcoleiro</p>
-    <input type="password" id="senha-input" placeholder="Digite a senha de acesso" onkeydown="if(event.key==='Enter') verificarSenha()">
-    <button class="login-btn" onclick="verificarSenha()">Entrar →</button>
-    <div class="login-erro" id="login-erro">❌ Senha incorreta. Tente novamente.</div>
-    <div class="login-rodape">Acesso restrito · CanaGanhos 2026</div>
-  </div>
-</div>
-<script>
-function verificarSenha() {
-  const v = document.getElementById('senha-input').value;
-  if (v === 'fazendaalves') {
-    document.getElementById('login-overlay').style.display = 'none';
-    document.body.style.overflow = '';
-  } else {
-    document.getElementById('login-erro').style.display = 'block';
-    document.getElementById('senha-input').value = '';
-    document.getElementById('senha-input').focus();
-  }
-}
-document.addEventListener('DOMContentLoaded', () => {
-  document.body.style.overflow = 'hidden';
-  setTimeout(() => document.getElementById('senha-input').focus(), 100);
-});
-</script>
-
 
 <header>
   <div class="logo-icon">🌾</div>
@@ -489,77 +264,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
 <main>
 
-  <!-- ===== PAINEL 1: SIMULADOR ===== -->
   <div id="panel-simulador" class="panel active">
     <div class="card">
       <h2>📋 Dados do Contrato de Arrendamento</h2>
       <div class="grid-2">
-        <div class="field">
-          <label>Área arrendada (hectares)</label>
-          <input type="number" id="area" value="50" min="1">
-        </div>
-        <div class="field">
-          <label>Produtividade estimada (t/ha)</label>
-          <input type="number" id="produtividade" value="80" min="1">
-        </div>
-        <div class="field">
-          <label>ATR médio esperado (kg/t)</label>
-          <input type="number" id="atr" value="138" min="100" max="180">
-        </div>
-        <div class="field">
-          <label>Preço do ATR (R$/kg)</label>
-          <input type="number" id="preco_atr" value="0.74" step="0.01" min="0.1">
-        </div>
-        <div class="field">
-          <label>Modalidade do contrato</label>
-          <select id="modalidade">
-            <option value="atr">Pagamento por ATR</option>
-            <option value="tonelada">Pagamento por tonelada</option>
-            <option value="percentual">Percentual de ATR</option>
-          </select>
-        </div>
-        <div class="field">
-          <label>Percentual repassado ao produtor (%)</label>
-          <input type="number" id="percentual" value="100" min="1" max="100">
-        </div>
+        <div class="field"><label>Área arrendada (hectares)</label><input type="number" id="area" value="50" min="1"></div>
+        <div class="field"><label>Produtividade estimada (t/ha)</label><input type="number" id="produtividade" value="80" min="1"></div>
+        <div class="field"><label>ATR médio esperado (kg/t)</label><input type="number" id="atr" value="138" min="100" max="180"></div>
+        <div class="field"><label>Preço do ATR (R$/kg)</label><input type="number" id="preco_atr" value="0.74" step="0.01" min="0.1"></div>
+        <div class="field"><label>Modalidade do contrato</label><select id="modalidade"><option value="atr">Pagamento por ATR</option><option value="tonelada">Pagamento por tonelada</option><option value="percentual">Percentual de ATR</option></select></div>
+        <div class="field"><label>Percentual repassado ao produtor (%)</label><input type="number" id="percentual" value="100" min="1" max="100"></div>
       </div>
     </div>
 
     <div class="card">
       <h2>💸 Custos do Produtor</h2>
       <div class="grid-3">
-        <div class="field">
-          <label>Arrendamento pago (R$/t ou %)</label>
-          <input type="number" id="custo_arrendamento" value="0" min="0">
-        </div>
-        <div class="field">
-          <label>Corte/Colheita (R$/t)</label>
-          <input type="number" id="custo_colheita" value="22" min="0">
-        </div>
-        <div class="field">
-          <label>Frete (R$/t)</label>
-          <input type="number" id="custo_frete" value="8" min="0">
-        </div>
-        <div class="field">
-          <label>Insumos / ha (R$)</label>
-          <input type="number" id="custo_insumos" value="800" min="0">
-        </div>
-        <div class="field">
-          <label>Outras despesas / ha (R$)</label>
-          <input type="number" id="custo_outros" value="200" min="0">
-        </div>
-        <div class="field">
-          <label>Taxa administrativa usina (%)</label>
-          <input type="number" id="taxa_usina" value="3" min="0" max="20">
-        </div>
+        <div class="field"><label>Arrendamento pago (R$/t ou %)</label><input type="number" id="custo_arrendamento" value="0" min="0"></div>
+        <div class="field"><label>Corte/Colheita (R$/t)</label><input type="number" id="custo_colheita" value="22" min="0"></div>
+        <div class="field"><label>Frete (R$/t)</label><input type="number" id="custo_frete" value="8" min="0"></div>
+        <div class="field"><label>Insumos / ha (R$)</label><input type="number" id="custo_insumos" value="800" min="0"></div>
+        <div class="field"><label>Outras despesas / ha (R$)</label><input type="number" id="custo_outros" value="200" min="0"></div>
+        <div class="field"><label>Taxa administrativa usina (%)</label><input type="number" id="taxa_usina" value="3" min="0" max="20"></div>
       </div>
     </div>
 
     <div style="display:flex; gap:12px; flex-wrap:wrap;">
-      <button class="btn" onclick="calcular()">
-        <span>Calcular ganhos</span>
-        <div class="spinner" id="spinner1"></div>
-      </button>
+      <button class="btn" onclick="calcular()"><span>Calcular ganhos</span></button>
       <button class="btn btn-outline" onclick="gerarAnaliseIA()">🤖 Analisar com IA</button>
     </div>
 
@@ -579,42 +310,20 @@ document.addEventListener('DOMContentLoaded', () => {
     </div>
   </div>
 
-  <!-- ===== PAINEL 2: CALCULADORA ATR ===== -->
   <div id="panel-atr" class="panel">
     <div class="card">
       <h2>🧪 Cálculo de ATR — Verificação da Nota Fiscal</h2>
-      <p style="color:var(--cinza);font-size:0.9rem;margin-bottom:20px;">
-        Insira os dados analíticos para calcular o ATR e comparar com o valor informado pela usina.
-      </p>
+      <p style="color:var(--cinza);font-size:0.9rem;margin-bottom:20px;">Insira os dados analíticos para calcular o ATR e comparar com o valor informado pela usina.</p>
       <div class="grid-2">
-        <div class="field">
-          <label>Pol da cana (% PCC)</label>
-          <input type="number" id="pol" value="14.2" step="0.01">
-        </div>
-        <div class="field">
-          <label>Fibra da cana (%)</label>
-          <input type="number" id="fibra" value="13.5" step="0.01">
-        </div>
-        <div class="field">
-          <label>Pureza (%)</label>
-          <input type="number" id="pureza" value="86" step="0.1">
-        </div>
-        <div class="field">
-          <label>AR — Açúcares Redutores (%)</label>
-          <input type="number" id="ar" value="0.55" step="0.01">
-        </div>
-        <div class="field">
-          <label>ATR informado pela usina (kg/t)</label>
-          <input type="number" id="atr_usina" value="138" step="0.1">
-        </div>
-        <div class="field">
-          <label>Toneladas entregues (t)</label>
-          <input type="number" id="ton_entregues" value="4000">
-        </div>
+        <div class="field"><label>Pol da cana (% PCC)</label><input type="number" id="pol" value="14.2" step="0.01"></div>
+        <div class="field"><label>Fibra da cana (%)</label><input type="number" id="fibra" value="13.5" step="0.01"></div>
+        <div class="field"><label>Pureza (%)</label><input type="number" id="pureza" value="86" step="0.1"></div>
+        <div class="field"><label>AR — Açúcares Redutores (%)</label><input type="number" id="ar" value="0.55" step="0.01"></div>
+        <div class="field"><label>ATR informado pela usina (kg/t)</label><input type="number" id="atr_usina" value="138" step="0.1"></div>
+        <div class="field"><label>Toneladas entregues (t)</label><input type="number" id="ton_entregues" value="4000"></div>
       </div>
       <br>
       <button class="btn" onclick="calcularATR()">Verificar ATR</button>
-
       <div class="resultado" id="resultado-atr">
         <h3>🧮 Verificação de ATR</h3>
         <div class="resultado-grid" id="resultado-atr-grid"></div>
@@ -626,14 +335,10 @@ document.addEventListener('DOMContentLoaded', () => {
     </div>
   </div>
 
-  <!-- ===== PAINEL 3: CONSULTOR IA ===== -->
   <div id="panel-consultor" class="panel">
     <div class="card">
       <h2>🤖 Consultor Sucroalcoleiro IA</h2>
-      <p style="color:var(--cinza);font-size:0.9rem;margin-bottom:16px;">
-        Tire dúvidas sobre ATR, contratos, CONSECANA, precificação, colheita e direitos do produtor.
-      </p>
-
+      <p style="color:var(--cinza);font-size:0.9rem;margin-bottom:16px;">Tire dúvidas sobre ATR, contratos, CONSECANA, precificação, colheita e direitos do produtor.</p>
       <div class="quick-btns">
         <button class="quick-btn" onclick="perguntaRapida('O que é ATR e como ele define meu pagamento?')">O que é ATR?</button>
         <button class="quick-btn" onclick="perguntaRapida('Como funciona o sistema CONSECANA de precificação?')">CONSECANA</button>
@@ -642,9 +347,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <button class="quick-btn" onclick="perguntaRapida('O que é Pol, Fibra e Pureza da cana?')">Pol, Fibra, Pureza</button>
         <button class="quick-btn" onclick="perguntaRapida('Como calcular se meu arrendamento é rentável?')">Rentabilidade</button>
       </div>
-
       <div class="chat-area" id="chat"></div>
-
       <div class="chat-input-row">
         <input type="text" id="chat-input" placeholder="Faça sua pergunta sobre o setor sucroalcoleiro..." onkeydown="if(event.key==='Enter') enviarChat()">
         <button class="btn" onclick="enviarChat()">Enviar →</button>
@@ -655,7 +358,6 @@ document.addEventListener('DOMContentLoaded', () => {
 </main>
 
 <script>
-// === UTILITÁRIOS ===
 const fmt = v => 'R$ ' + Number(v).toLocaleString('pt-BR', {minimumFractionDigits:2, maximumFractionDigits:2});
 const fmtN = (v,d=1) => Number(v).toLocaleString('pt-BR', {minimumFractionDigits:d, maximumFractionDigits:d});
 const $ = id => document.getElementById(id);
@@ -669,50 +371,34 @@ function trocarAba(aba) {
   $('panel-' + aba).classList.add('active');
 }
 
-// === SIMULADOR ===
 function calcular() {
-  const area = +$('area').value;
-  const prod = +$('produtividade').value;
-  const atr = +$('atr').value;
-  const precoATR = +$('preco_atr').value;
-  const perc = +$('percentual').value / 100;
-  const taxaUsina = +$('taxa_usina').value / 100;
-  const custoColheita = +$('custo_colheita').value;
-  const custoFrete = +$('custo_frete').value;
-  const custoInsumos = +$('custo_insumos').value;
-  const custoOutros = +$('custo_outros').value;
+  const area = +$('area').value, prod = +$('produtividade').value;
+  const atr = +$('atr').value, precoATR = +$('preco_atr').value;
+  const perc = +$('percentual').value / 100, taxaUsina = +$('taxa_usina').value / 100;
+  const custoColheita = +$('custo_colheita').value, custoFrete = +$('custo_frete').value;
+  const custoInsumos = +$('custo_insumos').value, custoOutros = +$('custo_outros').value;
   const custoArrendamento = +$('custo_arrendamento').value;
 
   const tonTotal = area * prod;
   const receitaBruta = tonTotal * atr * precoATR * perc;
   const descTaxa = receitaBruta * taxaUsina;
   const receitaLiquida = receitaBruta - descTaxa;
-
-  const custosVarPorTon = custoColheita + custoFrete + custoArrendamento;
-  const custosVariaveis = tonTotal * custosVarPorTon;
+  const custosVariaveis = tonTotal * (custoColheita + custoFrete + custoArrendamento);
   const custosFixos = area * (custoInsumos + custoOutros);
   const custoTotal = custosVariaveis + custosFixos;
-
   const lucro = receitaLiquida - custoTotal;
   const lucroHa = lucro / area;
   const margemPct = (lucro / receitaLiquida) * 100;
   const pontoEquilibrio = custoTotal / (atr * precoATR * perc);
 
-  const items = [
+  $('resultado-grid').innerHTML = [
     {valor: fmtN(tonTotal,0) + ' t', rotulo: 'Produção Total'},
     {valor: fmt(receitaBruta), rotulo: 'Receita Bruta'},
     {valor: fmt(descTaxa), rotulo: 'Desconto Usina'},
     {valor: fmt(receitaLiquida), rotulo: 'Receita Líquida'},
     {valor: fmt(custoTotal), rotulo: 'Custo Total'},
     {valor: fmt(lucro), rotulo: 'Resultado Líquido'},
-  ];
-
-  $('resultado-grid').innerHTML = items.map(it => `
-    <div class="resultado-item">
-      <div class="valor">${it.valor}</div>
-      <div class="rotulo">${it.rotulo}</div>
-    </div>
-  `).join('');
+  ].map(it => `<div class="resultado-item"><div class="valor">${it.valor}</div><div class="rotulo">${it.rotulo}</div></div>`).join('');
 
   const classeMargem = margemPct < 10 ? 'ruim' : margemPct < 25 ? 'ok' : 'bom';
   $('barras').innerHTML = `
@@ -723,8 +409,7 @@ function calcular() {
     <div class="barra-wrap" style="color:var(--palha);margin-top:10px">
       <div class="barra-label"><span>Ponto de equilíbrio</span><span>${fmtN(pontoEquilibrio,0)} t</span></div>
       <div class="barra"><div class="barra-fill ok" style="width:${Math.min(100,(pontoEquilibrio/tonTotal)*100)}%"></div></div>
-    </div>
-  `;
+    </div>`;
 
   $('resultado').classList.add('show');
   window._dadosCalculo = {area, prod, tonTotal, atr, precoATR, perc, receitaBruta, receitaLiquida, custoTotal, lucro, lucroHa, margemPct, pontoEquilibrio};
@@ -733,112 +418,53 @@ function calcular() {
 async function gerarAnaliseIA() {
   if (!window._dadosCalculo) { calcular(); }
   const d = window._dadosCalculo;
-  const iaBox = $('ia-analise');
-  const iaTexto = $('ia-texto');
-  iaBox.classList.add('show');
-  iaTexto.textContent = '⏳ Analisando sua safra...';
-
-  const prompt = `Você é um engenheiro agrônomo e consultor do setor sucroalcoleiro brasileiro, especializado em contratos de arrendamento de cana-de-açúcar.
-
-Analise os seguintes dados de uma safra:
-- Área: ${d.area} ha | Produtividade: ${d.prod} t/ha | Produção total: ${d.tonTotal} toneladas
-- ATR: ${d.atr} kg/t | Preço ATR: R$ ${d.precoATR}/kg | % repassado: ${(d.perc*100).toFixed(0)}%
-- Receita bruta: R$ ${d.receitaBruta.toFixed(2)}
-- Receita líquida: R$ ${d.receitaLiquida.toFixed(2)}
-- Custo total: R$ ${d.custoTotal.toFixed(2)}
-- Resultado: R$ ${d.lucro.toFixed(2)} (Margem: ${d.margemPct.toFixed(1)}%)
-- Lucro por hectare: R$ ${d.lucroHa.toFixed(2)}
-- Ponto de equilíbrio: ${d.pontoEquilibrio.toFixed(0)} toneladas
-
-Forneça uma análise em português de 4 a 6 parágrafos curtos e objetivos:
-1. Avalie se o resultado é satisfatório para o setor
-2. Aponte 2 principais riscos ou pontos de atenção
-3. Sugira 2 ações práticas para melhorar a rentabilidade
-4. Comente sobre o ponto de equilíbrio em relação à produção
-Use linguagem direta, técnica mas acessível ao produtor rural.`;
-
+  $('ia-analise').classList.add('show');
+  $('ia-texto').textContent = '⏳ Analisando sua safra...';
   try {
     const res = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: {'Content-Type':'application/json'},
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 1000,
-        messages: [{role:'user', content: prompt}]
-      })
+      method: 'POST', headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({ model: 'claude-sonnet-4-6', max_tokens: 1000, messages: [{role:'user', content:
+        `Você é um engenheiro agrônomo e consultor do setor sucroalcoleiro brasileiro. Analise os dados: Área: ${d.area} ha | Produtividade: ${d.prod} t/ha | Produção: ${d.tonTotal} t | ATR: ${d.atr} kg/t | Preço ATR: R$ ${d.precoATR}/kg | Receita bruta: R$ ${d.receitaBruta.toFixed(2)} | Receita líquida: R$ ${d.receitaLiquida.toFixed(2)} | Custo total: R$ ${d.custoTotal.toFixed(2)} | Resultado: R$ ${d.lucro.toFixed(2)} (Margem: ${d.margemPct.toFixed(1)}%) | Lucro/ha: R$ ${d.lucroHa.toFixed(2)} | Ponto equilíbrio: ${d.pontoEquilibrio.toFixed(0)} t. Em 4 parágrafos curtos: 1) avalie o resultado, 2) aponte 2 riscos, 3) sugira 2 melhorias, 4) comente o ponto de equilíbrio. Linguagem técnica mas acessível ao produtor rural.`
+      }]})
     });
     const data = await res.json();
-    iaTexto.textContent = data.content?.[0]?.text || 'Não foi possível gerar análise.';
-  } catch(e) {
-    iaTexto.textContent = 'Erro ao conectar com a IA. Verifique sua conexão.';
-  }
+    $('ia-texto').textContent = data.content?.[0]?.text || 'Não foi possível gerar análise.';
+  } catch(e) { $('ia-texto').textContent = 'Erro ao conectar com a IA.'; }
 }
 
-// === CALCULADORA ATR ===
 function calcularATR() {
-  const pol = +$('pol').value;
-  const fibra = +$('fibra').value;
-  const pureza = +$('pureza').value;
-  const ar = +$('ar').value;
-  const atrUsina = +$('atr_usina').value;
-  const ton = +$('ton_entregues').value;
-
-  // Fórmula CONSECANA
+  const pol = +$('pol').value, fibra = +$('fibra').value;
+  const ar = +$('ar').value, atrUsina = +$('atr_usina').value, ton = +$('ton_entregues').value;
   const atrCalculado = (pol * 1.0526) - (ar * 0.5879) - (fibra * 0.0940);
   const diferenca = atrCalculado - atrUsina;
-  const diferencaValor = diferenca * ton * 0.74; // preço referência
-
-  const ok = Math.abs(diferenca) < 2;
-  const status = ok ? '✅ Dentro da margem' : diferenca > 0 ? '⚠️ Possível subcobrança' : '⚠️ ATR abaixo do calculado';
-
-  $('resultado-atr-grid').innerHTML = `
-    <div class="resultado-item"><div class="valor">${fmtN(atrCalculado)} kg/t</div><div class="rotulo">ATR Calculado</div></div>
-    <div class="resultado-item"><div class="valor">${fmtN(atrUsina)} kg/t</div><div class="rotulo">ATR da Usina</div></div>
-    <div class="resultado-item"><div class="valor">${fmtN(diferenca,2)} kg/t</div><div class="rotulo">Diferença</div></div>
-  `;
+  const diferencaValor = diferenca * ton * 0.74;
+  const status = Math.abs(diferenca) < 2 ? '✅ Dentro da margem' : diferenca > 0 ? '⚠️ Possível subcobrança' : '⚠️ ATR abaixo do calculado';
+  $('resultado-atr-grid').innerHTML = [
+    {valor: fmtN(atrCalculado) + ' kg/t', rotulo: 'ATR Calculado'},
+    {valor: fmtN(atrUsina) + ' kg/t', rotulo: 'ATR da Usina'},
+    {valor: fmtN(diferenca,2) + ' kg/t', rotulo: 'Diferença'},
+  ].map(it => `<div class="resultado-item"><div class="valor">${it.valor}</div><div class="rotulo">${it.rotulo}</div></div>`).join('');
   $('resultado-atr').classList.add('show');
-
   gerarParecer(atrCalculado, atrUsina, diferenca, diferencaValor, ton, status);
 }
 
 async function gerarParecer(atrCalc, atrUsina, dif, difValor, ton, status) {
   $('ia-atr').classList.add('show');
   $('ia-atr-texto').textContent = '⏳ Gerando parecer técnico...';
-
-  const prompt = `Você é um engenheiro agrônomo especialista em qualidade da cana-de-açúcar e sistema CONSECANA.
-  
-Análise de ATR:
-- ATR calculado pela fórmula CONSECANA: ${atrCalc.toFixed(2)} kg/t
-- ATR informado pela usina: ${atrUsina.toFixed(2)} kg/t
-- Diferença: ${dif.toFixed(2)} kg/t
-- Status: ${status}
-- Toneladas entregues: ${ton} t
-- Impacto financeiro estimado: R$ ${difValor.toFixed(2)}
-
-Em 3 parágrafos curtos:
-1. Interprete a diferença encontrada (normal ou suspeita?)
-2. Explique ao produtor seus direitos e próximos passos se houver discrepância
-3. Dê 1 dica prática sobre como monitorar a qualidade da cana para maximizar ATR
-Seja direto e use linguagem acessível.`;
-
   try {
     const res = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST', headers: {'Content-Type':'application/json'},
-      body: JSON.stringify({ model:'claude-sonnet-4-20250514', max_tokens:800, messages:[{role:'user',content:prompt}] })
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ model:'claude-sonnet-4-6', max_tokens:800, messages:[{role:'user', content:
+        `Você é especialista em qualidade da cana e sistema CONSECANA. ATR calculado: ${atrCalc.toFixed(2)} kg/t | ATR usina: ${atrUsina.toFixed(2)} kg/t | Diferença: ${dif.toFixed(2)} kg/t | Status: ${status} | Toneladas: ${ton} | Impacto: R$ ${difValor.toFixed(2)}. Em 3 parágrafos: 1) interprete a diferença, 2) explique direitos e próximos passos, 3) dê 1 dica para maximizar ATR.`
+      }]})
     });
     const data = await res.json();
     $('ia-atr-texto').textContent = data.content?.[0]?.text || 'Erro na IA.';
-  } catch(e) {
-    $('ia-atr-texto').textContent = 'Erro ao conectar.';
-  }
+  } catch(e) { $('ia-atr-texto').textContent = 'Erro ao conectar.'; }
 }
 
-// === CHAT ===
 const chatHistory = [];
-const systemMsg = `Você é um consultor especialista do setor sucroalcoleiro brasileiro: engenheiro agrônomo com pós-graduação em produção de açúcar e álcool, também experiente em contratos de arrendamento de cana. 
-Responda SEMPRE em português, de forma clara e técnica mas acessível ao produtor rural. 
-Ajude com dúvidas sobre: ATR, CONSECANA, precificação, contratos, qualidade da cana, direitos do produtor, cálculos de rentabilidade, descontos em nota fiscal, e boas práticas agronômicas.
-Seja objetivo, prático e do lado do produtor.`;
+const systemMsg = `Você é um consultor especialista do setor sucroalcoleiro brasileiro. Responda SEMPRE em português, de forma clara e técnica mas acessível ao produtor rural. Ajude com dúvidas sobre ATR, CONSECANA, contratos, qualidade da cana, direitos do produtor e rentabilidade.`;
 
 async function enviarChat() {
   const input = $('chat-input');
@@ -847,25 +473,17 @@ async function enviarChat() {
   input.value = '';
   adicionarMensagem(texto, 'user');
   chatHistory.push({role:'user', content: texto});
-
   const digitando = adicionarMensagem('...', 'bot');
-
   try {
     const res = await fetch('https://api.anthropic.com/v1/messages', {
       method:'POST', headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({
-        model:'claude-sonnet-4-20250514', max_tokens:900,
-        system: systemMsg,
-        messages: chatHistory
-      })
+      body: JSON.stringify({ model:'claude-sonnet-4-6', max_tokens:900, system: systemMsg, messages: chatHistory })
     });
     const data = await res.json();
-    const resposta = data.content?.[0]?.text || 'Não consegui responder. Tente novamente.';
+    const resposta = data.content?.[0]?.text || 'Não consegui responder.';
     chatHistory.push({role:'assistant', content: resposta});
     digitando.textContent = resposta;
-  } catch(e) {
-    digitando.textContent = 'Erro de conexão. Tente novamente.';
-  }
+  } catch(e) { digitando.textContent = 'Erro de conexão.'; }
   $('chat').scrollTop = 9999;
 }
 
